@@ -1,7 +1,11 @@
 <?php
+
+session_start();
+
 require_once __DIR__.'/library/RequirePage.php';
 require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/library/Twig.php';
+require_once __DIR__.'/library/CheckSession.php';
 
 
 $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : '/';

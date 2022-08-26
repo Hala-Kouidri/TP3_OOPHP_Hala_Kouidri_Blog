@@ -9,6 +9,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1 class='error'>OUH LA LA ... Error 404</h1>
+    <h1 class='p-medium'>OUH LA LA ... Error 404</h1>
 </body>
 </html>

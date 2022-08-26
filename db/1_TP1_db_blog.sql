@@ -82,25 +82,52 @@ CREATE TABLE `Commentaire` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `privilege`
+--
+
+DROP TABLE IF EXISTS `Privilege`;
+CREATE TABLE IF NOT EXISTS `Privilege` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Privilege` varchar(45) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `privilege`
+--
+
+INSERT INTO `Privilege` (`id`, `privilege`) VALUES
+(1, 'Auteur'),
+(2, 'Lecteur');
+
+
+-- --------------------------------------------------------
+
+
+--
 -- Table structure for table `Usager`
 --
 
+DROP TABLE IF EXISTS `Usager`;
 CREATE TABLE `Usager` (
   `nomUsager` varchar(45) NOT NULL,
-  `mdp` varchar(45) NOT NULL,
-  `courriel` varchar(45) NOT NULL
+  `mdp` varchar(255) NOT NULL,
+  `courriel` varchar(255) NOT NULL,
+  `temp_password` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `privilege_id` int(11) NOT NULL,
+  PRIMARY KEY (`nomUsager`),
+  KEY `fk_user_privilege1_idx` (`privilege_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Usager`
 --
 
-INSERT INTO `Usager` (`nomUsager`, `mdp`, `courriel`) VALUES
-('HalaKo', 'HalaKouidri', 'halako@gmail.com');
+INSERT INTO `Usager` (`nomUsager`, `mdp`, `courriel`, `temp_password`, `privilege_id`) VALUES
+('HalaKo', '$2y$10$LG5uKyDU5C84hn.hHeKUKeu2lcAQrwmfMebUCA2g3cLsHHaa7KzTG', 'halako@gmail.com', NULL, 1),
+('Marcos', '$2y$10$PLcRAeScuMyjt70zvG0ZYOvyQA.KqBjmHOJyetQs72/rwhoKnSZXG', 'marcos@gmail.com', NULL, 1),
+('MeriKo', '$2y$10$9Nj5/URHRb9tSA974FuLdOsl4L/iwn/gRLH8bVbAclGKOZHNitA6S', 'meriko@gmail.com', NULL, 2);
 
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `Article`
@@ -123,16 +150,6 @@ ALTER TABLE `Commentaire`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idUsager_idx` (`idUsager`),
   ADD KEY `idArticle_idx` (`idArticle`);
-
---
--- Indexes for table `Usager`
---
-ALTER TABLE `Usager`
-  ADD PRIMARY KEY (`nomUsager`);
-
---
--- AUTO_INCREMENT for dumped tables
---
 
 --
 -- AUTO_INCREMENT for table `Article`

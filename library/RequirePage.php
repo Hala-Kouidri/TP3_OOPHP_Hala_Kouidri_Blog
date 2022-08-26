@@ -6,7 +6,7 @@ class RequirePage{
     }
 
     static function redirect($url){
-        header("location: http://localhost/1_PROG_PHP_WEB_AVANCEE/1-3_TP/TP2/TP2_Hala_Kouidri_1353390/$url");
+        header("location: http://localhost/1_PROG_PHP_WEB_AVANCEE/1-3_TP/TP3/TP3_Hala_Kouidri_1353390/$url");
     }
 
     static function requireLibrary($page){

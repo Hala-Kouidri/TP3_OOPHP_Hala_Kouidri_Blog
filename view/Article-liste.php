@@ -1,33 +1,11 @@
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <meta name="author" content="Hala Kouidri - 1353390" >
-        <title>Article list</title>
-        <link rel="stylesheet" href="{{path}}styles/style.css">
-    </head>
-    <body>
-    <header class="header">
-        <div class="header__logo">
-            <a class="logo" href="{{path}}Article/liste">Prog & Lifestyle</a>
-        </div>
-
-        <!-- Le bouton dans l'entête : ajout article -->
-        <div class="header__btns">
-        
-            <a class='btn' href="{{path}}Article/create">Ajouter un Article</a>
-            <p> HalaKo </p>
-            <a class='btn-log' href='#'>Logout</a>
-        
-        </div>
-    </header>
-
-    <main>
+{{ include ('header.php', { title: 'Articles'} ) }}
 
     <h2>Articles</h2>
     <div class="flex">  
 
         
         <div class='container__article'>
+        
             {% for Article in Articles %}
                 <div class='article__titre'>{{ Article.titre }}</div>
                 <div class='article__texte'>{{ Article.text }}</div>
@@ -40,7 +18,8 @@
                 <div class='article__auteur'>Auteur : {{ Article.idAuteur }}</div>
                 <div class='article__auteur'>{{ Article.date }}</div>
 
-                <!-- Boutons Modification et suppression d'articles -->
+                <!-- Boutons Modification et suppression d'articles - accessible seulement pour les "auteurs" pour leur articles seulement -->
+                {% if  session.privilege_id == 1 and session.nomUsager == Article.idAuteur %}
                 <div class='Modif-supprime'>
                     <a class='btn' href='{{path}}Article/edit/{{Article.id}}'> Modifier</a>
                     <!-- <a class='btn' href='{{path}}Article/delete/{{Article.id}}'>Supprimer </a> -->
@@ -51,13 +30,10 @@
                     </form>
 
                 </div>
+                {% endif %}
             {% endfor %}    
         </div>
         
     </div>
-    </main>
-    <footer>
-        <a class="btn" href="{{path}}Article/liste">Retourner à l'accueil</a>
-    </footer>
-    </body>
-</html>    
+    
+{{ include ('footer.php') }} 
